@@ -15,7 +15,7 @@ public class menuSearch extends JFrame implements ActionListener {
     controller controller = new controller();
     public menuSearch() {
         JLabel lblCategories = new JLabel("Categories");
-        lblCategories.setBounds(100, 10, 100,25);
+        lblCategories.setBounds(100, 40, 100,25);
         add(lblCategories);
 
         ArrayList<Category> categories = controller.getCategories();
@@ -24,22 +24,22 @@ public class menuSearch extends JFrame implements ActionListener {
             categoriesName[i] = categories.get(i).getName();
         }
         comboCategories = new JComboBox(categoriesName);
-        comboCategories.setBounds(200,10,200,25);
+        comboCategories.setBounds(200,40,200,25);
         add(comboCategories);
 
         JButton btnSearch = new JButton("Search");
-        btnSearch.setBounds (175, 250, 100, 40);
+        btnSearch.setBounds (175, 100, 100, 40);
         add(btnSearch);
         
         JButton btnBack = new JButton("Back");
-        btnBack.setBounds (275, 250, 100, 40);
+        btnBack.setBounds (275, 100, 100, 40);
         add(btnBack);
         
         btnSearch.addActionListener(this);
         btnBack.addActionListener(this);
 
         setTitle("Menu Search");
-        setSize(550, 350);
+        setSize(550, 200);
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
@@ -50,7 +50,6 @@ public class menuSearch extends JFrame implements ActionListener {
         String command = e.getActionCommand();
         switch(command) {
             case "Search":
-                String kolom[] = {"id","name","email","password","idCategory","photo"};
                 String data[][];
                 ArrayList<User> dataList;
                 if (comboCategories.getSelectedItem().toString().equals("Private Account")) {
@@ -70,10 +69,8 @@ public class menuSearch extends JFrame implements ActionListener {
                     data[i][4]=Integer.toString(currentUser.getIdCategory());
                     data[i][5]=currentUser.getPhoto();
                 }
-                table = new JTable(data, kolom);
-                table.setBounds(10,50,500,200);
-                JScrollPane sp = new JScrollPane(table);
-                add(sp);
+                dispose();
+                new menuData(data);
                 break;
             case "Back":
                 dispose();
